@@ -1,7 +1,7 @@
 import 'package:mason/mason.dart';
 import 'dart:io';
 
-void run(HookContext context) async {
+Future<void> run(HookContext context) async {
   final logger = context.logger.progress('Genarate flutter app');
 
   try {
