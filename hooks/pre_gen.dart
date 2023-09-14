@@ -2,12 +2,10 @@ import 'package:mason/mason.dart';
 import 'dart:io';
 
 void run(HookContext context) async {
-  final appGen = context.logger;
-
-  appGen.progress('Genarate flutter app');
+  context.logger.progress('Genarate flutter app').complete();
   try {
     await _generateApp(context);
-    appGen.progress('flutter project create completed').complete();
+    context.logger.progress('flutter project create completed').complete();
   } catch (e) {
     context.logger.err('project Gen error');
   }
