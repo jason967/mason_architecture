@@ -4,13 +4,13 @@ import 'dart:io';
 Future<void> run(HookContext context) async {
   final logger = context.logger.progress('Genarate flutter app');
 
-  await _generateApp(context);
-  // try {
-  //   final end = context.logger.progress('flutter project create completed');
-  //   end.complete();
-  // } catch (e) {
-  //   context.logger.err('project Gen error');
-  // }
+  try {
+    final end = context.logger.progress('flutter project create completed');
+    await _generateApp(context);
+    end.complete();
+  } catch (e) {
+    context.logger.err('project Gen error');
+  }
   logger.complete();
 }
 
@@ -18,6 +18,6 @@ Future<void> _generateApp(HookContext context) async {
   final progress = context.logger.progress('Running flutter project create ');
 
   await Process.run('flutter', ['create', '{{name}}']);
-  await Process.run('flutter', ['pub', 'get']);
+
   progress.complete();
 }
