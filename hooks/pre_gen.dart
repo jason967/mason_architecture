@@ -20,7 +20,7 @@ Future<void> _generateApp(HookContext context) async {
   final progress =
       context.logger.progress('Running flutter project create ${name}');
 
-  await Process.run('flutter', ['create', 'base']);
+  await Process.run('flutter', ['create', '$name']);
 
   progress.complete();
 }
