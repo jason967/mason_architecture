@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:mason/mason.dart';
 
 Future<void> run(HookContext context) async {
-  await _removeFiles(context, '.gitkeep');
   await _moveFile(context);
+  await _removeFiles(context, '.gitkeep');
 }
 
 Future<void> _removeFiles(HookContext context, String name) async {
@@ -40,7 +40,7 @@ Future<void> _moveFile(HookContext context) async {
 
   var result = await Process.run('mv', [
     'lib',
-    './$name/lib/',
+    './$name/',
   ]);
   if (result.exitCode == 0) {
     final done = context.logger.progress('move files done');
