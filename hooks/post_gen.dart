@@ -38,6 +38,8 @@ Future<void> _moveFile(HookContext context) async {
   moves.complete();
   final String name = context.vars['name'];
 
+  await Process.run('rm', ['lib']);
+
   var result = await Process.run('mv', [
     'lib',
     './$name/',
