@@ -19,8 +19,6 @@ Future<void> _generateApp(HookContext context) async {
 
   final progress =
       context.logger.progress('Running flutter project create ${name}');
+  await Process.run('flutter', ['create', '--platforms=ios,android', '$name']);
   progress.complete();
-
-  await Process.run(
-      'flutter', ['create', '--platforms=', 'ios,android', '$name']);
 }
