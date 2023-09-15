@@ -3,6 +3,7 @@ import 'package:mason/mason.dart';
 
 Future<void> run(HookContext context) async {
   await _removeFiles(context, '.gitkeep');
+  await _moveFile(context);
 }
 
 Future<void> _removeFiles(HookContext context, String name) async {
@@ -30,4 +31,21 @@ Future<void> _AddPackages(HookContext context, String name) async {
   await Process.run('flutter', ['pub', 'get']);
 
   progress.complete();
+}
+
+Future<void> _moveFile(HookContext context) async {
+  final moves = context.logger.progress('move files ...');
+  moves.complete();
+  final String name = context.vars['name'];
+
+  var result = await Process.run('mv', [
+    'lib',
+    './$name/lib/',
+  ]);
+  if (result.exitCode == 0) {
+    final done = context.logger.progress('move files done');
+    done.complete();
+  } else {
+    context.logger.err(result.stderr);
+  }
 }
